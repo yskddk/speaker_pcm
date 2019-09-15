@@ -41,7 +41,8 @@
  *     const unsigned char sounddata_data[] PROGMEM = { ..... };
  *
  * You can use wav2c from GBA CSS:
- *     https://thieumsweb.free.fr/english/gbacss.html
+ *     https://thieumsweb.free.fr/english/gbacss.html (OLD)
+ *     https://github.com/olleolleolle/wav2c (CURRENT)
  * Then add "PROGMEM" in the right place. I hacked it up to dump the samples
  * as unsigned rather than signed, but it shouldn't matter.
  *
@@ -89,7 +90,7 @@ ISR(TIMER1_COMPA_vect) {
                 // Ramp down to zero to reduce the click at the end of playback.
                 OCR2A = sounddata_length + lastSample - sample;
             } else {
-                OCR2B = sounddata_length + lastSample - sample;                
+                OCR2B = sounddata_length + lastSample - sample;
             }
         }
     }
@@ -97,7 +98,7 @@ ISR(TIMER1_COMPA_vect) {
         if(speakerPin==11){
             OCR2A = pgm_read_byte(&sounddata_data[sample]);
         } else {
-            OCR2B = pgm_read_byte(&sounddata_data[sample]);            
+            OCR2B = pgm_read_byte(&sounddata_data[sample]);
         }
     }
 
@@ -169,7 +170,6 @@ void startPlayback()
     sei();
 }
 
-
 void setup()
 {
     pinMode(ledPin, OUTPUT);
@@ -181,6 +181,4 @@ void loop()
 {
     while (true);
 }
-
-
 
